@@ -3,6 +3,7 @@ import Category from "../Category/Category";
 import Description from "../Description/Description";
 import Features from "../Features/Features";
 import PopularMenu from "../PopularMenu/PopularMenu";
+import Testimonials from "../Testimonials/Testimonials";
 
 const Home = () => {
   return (
@@ -14,6 +15,9 @@ const Home = () => {
         <PopularMenu />
       </div>
       <Features />
+      <div className="max-w-screen-xl mx-auto">
+        <Testimonials />
+      </div>
     </>
   );
 };

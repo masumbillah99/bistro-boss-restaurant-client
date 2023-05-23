@@ -6,7 +6,7 @@ const Features = () => {
   return (
     <section>
       <div
-        className="hero h-[848px]"
+        className="hero h-[848px] bg-fixed"
         style={{
           backgroundImage: `url(${featImg})`,
         }}
@@ -27,7 +27,7 @@ const Features = () => {
               Eaque repellat recusandae ad laudantium tempore consequatur
               consequuntur omnis ullam maxime tenetur.
             </p>
-            <button className="btn btn-outline btn-primary mt-5 px-5">
+            <button className="btn btn-outline hover:btn-primary border-white border-0 border-b-4 mt-5 px-5 text-xl text-white">
               Read More
             </button>
           </div>
