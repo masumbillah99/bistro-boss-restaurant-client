@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+:root {
+  --logo-font: "Cinzel", serif;
+  --primary-font: "Inter", sans-serif;
+}
+
+/* body style start */
+
+body {
+  font-family: var(--primary-font);
+}
+
+.logo-font {
+  font-family: var(--logo-font);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
