@@ -27,7 +27,7 @@ const Features = () => {
               Eaque repellat recusandae ad laudantium tempore consequatur
               consequuntur omnis ullam maxime tenetur.
             </p>
-            <button className="btn btn-outline hover:btn-primary border-white border-0 border-b-4 mt-5 px-5 text-xl text-white">
+            <button className="btn btn-outline border-white border-0 border-b-4 mt-5 px-5 text-xl text-white">
               Read More
             </button>
           </div>

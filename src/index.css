@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
 :root {
   --logo-font: "Cinzel", serif;
   --primary-font: "Inter", sans-serif;
+  --text-font: "Raleway", sans-serif;
 }
 
 /* body style start */
@@ -14,6 +16,10 @@ body {
 
 .logo-font {
   font-family: var(--logo-font);
+}
+
+.text-font {
+  font-family: var(--text-font);
 }
 
 @tailwind base;

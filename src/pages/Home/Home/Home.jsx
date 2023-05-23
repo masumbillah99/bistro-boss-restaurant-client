@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import CallUs from "../CallUs/CallUs";
 import Category from "../Category/Category";
 import Description from "../Description/Description";
 import Features from "../Features/Features";
@@ -13,6 +14,7 @@ const Home = () => {
       <div className="max-w-screen-xl mx-auto">
         <Description />
         <PopularMenu />
+        <CallUs />
       </div>
       <Features />
       <div className="max-w-screen-xl mx-auto">

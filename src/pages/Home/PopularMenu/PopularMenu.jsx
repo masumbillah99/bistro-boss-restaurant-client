@@ -16,13 +16,16 @@ const PopularMenu = () => {
   }, []);
 
   return (
-    <section className="my-20">
+    <section className="my-20 text-center">
       <SectionTitle subHeading={"Check it out"} heading={"from our menu"} />
-      <div className="grid lg:grid-cols-2 gap-10 mx-3 lg:mx-0">
+      <div className="grid lg:grid-cols-2 gap-10 mx-3 lg:mx-0 mb-10 text-left">
         {menu?.map((item) => (
           <MenuItem key={item._id} item={item} />
         ))}
       </div>
+      <button className="btn btn-outline border-0 border-b-2">
+        View Full Menu
+      </button>
     </section>
   );
 };
