@@ -1,5 +1,4 @@
 import service from "../../../assets/home/chef-service.jpg";
-
 const Description = () => {
   return (
     <>

@@ -1,0 +1,15 @@
+
+
+
+
+
+tools: 
+    tailwind css 
+    daisyui
+    @smastrom/react-rating
+    moment
+    react-helmet-async
+    react-icons 
+    react-parallax
+    react-responsive-carousel
+    swiper
