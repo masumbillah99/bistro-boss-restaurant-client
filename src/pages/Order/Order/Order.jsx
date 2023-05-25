@@ -13,7 +13,7 @@ const Order = () => {
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
-  const [menu, loading] = useMenu();
+  const [menu] = useMenu();
 
   //   if (loading) {
   //     <progress className="progress w-56"></progress>;

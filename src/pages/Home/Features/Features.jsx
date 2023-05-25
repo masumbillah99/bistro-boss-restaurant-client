@@ -11,10 +11,10 @@ const Features = () => {
           backgroundImage: `url(${featImg})`,
         }}
       >
-        <div className="hero-overlay bg-opacity-60 text-white pt-28">
+        <div className="hero-overlay bg-opacity-60 text-white">
           <SectionTitle subHeading={"Check it out"} heading={"from our menu"} />
         </div>
-        <div className="hero-content flex-col md:flex-row mt-44 gap-10">
+        <div className="hero-content flex-col lg:flex-row mt-44 gap-10">
           <img className="w-1/2" src={featImg} alt="" />
           <div className="text-white">
             <p>{moment().format("MMMM Do YYYY")}</p>
