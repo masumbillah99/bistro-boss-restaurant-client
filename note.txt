@@ -11,5 +11,6 @@ tools:
     react-helmet-async
     react-icons 
     react-parallax
+    react-tabs
     react-responsive-carousel
     swiper

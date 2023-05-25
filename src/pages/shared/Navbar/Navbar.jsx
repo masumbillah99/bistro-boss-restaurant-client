@@ -45,12 +45,12 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/shop"
+          to="/order"
           className={({ isActive }) =>
             isActive ? "text-[#EEFF25]" : "text-white"
           }
         >
-          our shop
+          Order Food
         </NavLink>
       </li>
     </>
