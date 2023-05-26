@@ -1,6 +1,17 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const Navbar = () => {
+  const { user, logOutUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOutUser()
+      .then()
+      .catch((error) => toast.success(error.message));
+  };
+
   const navItems = (
     <>
       <li>
@@ -54,14 +65,27 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          to="/login"
-          className={({ isActive }) =>
-            isActive ? "text-[#EEFF25]" : "text-white"
-          }
-        >
-          Login
-        </NavLink>
+        {user ? (
+          <>
+            <button
+              onClick={handleLogout}
+              className="btn btn-ghost bg-red-500 hover:bg-red-700"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? "text-[#EEFF25]" : "text-white"
+              }
+            >
+              Login
+            </NavLink>
+          </>
+        )}
       </li>
     </>
   );
@@ -103,6 +127,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal uppercase px-1">{navItems}</ul>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

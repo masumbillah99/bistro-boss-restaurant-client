@@ -1,22 +1,22 @@
-import { useContext } from "react";
-import { useRef } from "react";
-import { useEffect, useState } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
+import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import {
   loadCaptchaEnginge,
-  LoadCanvasTemplateNoReload,
   validateCaptcha,
   LoadCanvasTemplate,
 } from "react-simple-captcha";
 import bgImg from "../../../assets/others/authentication.png";
 import loginImg from "../../../assets/others/authentication2.png";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, googleSignIn } = useContext(AuthContext);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -26,19 +26,29 @@ const Login = () => {
     e.preventDefault();
     signInUser(email, password)
       .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
+        console.log(result.user);
+        toast.success("successfully logged in");
+        e.target.reset();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => toast.error(error.message));
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
       alert("Captcha does not match");
     }
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        toast.success("successfully logged in with google");
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   return (
@@ -81,16 +91,10 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
-                  ref={captchaRef}
+                  onBlur={handleValidateCaptcha}
                   placeholder="type the captcha above"
                   className="input input-bordered"
                 />
-                <button
-                  onClick={handleValidateCaptcha}
-                  className="btn btn-outline btn-sm mt-2"
-                >
-                  Validate
-                </button>
               </div>
               <div className="form-control mt-6">
                 <input
@@ -101,9 +105,38 @@ const Login = () => {
                 />
               </div>
             </form>
+            <div className="text-center pb-5">
+              <p>
+                New here?
+                <Link
+                  to="/signUp"
+                  className="text-orange-500 text-lg hover:underline ms-1"
+                >
+                  Create a New Account
+                </Link>
+              </p>
+              <p className="text-center mt-3">
+                Or Sign in with
+                <span className="flex flex-row gap-3 mt-3 items-center justify-center">
+                  <button className="btn btn-outline btn-circle text-lg">
+                    <FaFacebookF />
+                  </button>
+                  <button
+                    onClick={handleGoogleSignIn}
+                    className="btn btn-outline btn-circle text-lg"
+                  >
+                    <FaGoogle />
+                  </button>
+                  <button className="btn btn-outline btn-circle text-lg">
+                    <FaGithub />
+                  </button>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

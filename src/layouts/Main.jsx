@@ -6,12 +6,13 @@ const Main = () => {
   const location = useLocation();
   // console.log(location);
   const loginLayout = location.pathname.includes("login");
+  const signUpLayout = location.pathname.includes("signUp");
 
   return (
     <>
-      {loginLayout || <Navbar />}
+      {loginLayout || signUpLayout || <Navbar />}
       <Outlet />
-      {loginLayout || <Footer />}
+      {loginLayout || signUpLayout || <Footer />}
     </>
   );
 };
