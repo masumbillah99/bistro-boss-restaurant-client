@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -24,16 +25,6 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {/* <li>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            isActive ? "text-[#EEFF25]" : "text-white"
-          }
-        >
-          contact us
-        </NavLink>
-      </li> */}
       <li>
         <NavLink
           to="/dashboard"
@@ -65,28 +56,50 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        {user ? (
-          <>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#EEFF25] hover:bg-none"
+              : "text-white hover:bg-none"
+          }
+        >
+          <button className="btn gap-2">
+            <FaShoppingCart />
+            <div className="badge badge-secondary">+99</div>
+          </button>
+        </NavLink>
+      </li>
+      {user ? (
+        <>
+          <li>
+            <img
+              className="w-20 rounded-full mt-3"
+              src={user?.photoURL}
+              alt="user profile img"
+            />
+          </li>
+          <li>
             <button
               onClick={handleLogout}
               className="btn btn-ghost bg-red-500 hover:bg-red-700"
             >
               Logout
             </button>
-          </>
-        ) : (
-          <>
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                isActive ? "text-[#EEFF25]" : "text-white"
-              }
-            >
-              Login
-            </NavLink>
-          </>
-        )}
-      </li>
+          </li>
+        </>
+      ) : (
+        <li>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              isActive ? "text-[#EEFF25]" : "text-white"
+            }
+          >
+            Login
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -123,8 +136,10 @@ const Navbar = () => {
             Restaurant
           </Link>
         </div>
-        <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal uppercase px-1">{navItems}</ul>
+        <div className="ms-auto hidden lg:flex">
+          <ul className="menu menu-horizontal items-center uppercase px-1">
+            {navItems}
+          </ul>
         </div>
       </div>
       <ToastContainer />

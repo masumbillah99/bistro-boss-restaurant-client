@@ -1,5 +1,6 @@
 import FoodCard from "../../../components/FoodCard/FoodCard";
 
+// TODO: implement pagination here on this page?
 const OrderTab = ({ items }) => {
   return (
     <>

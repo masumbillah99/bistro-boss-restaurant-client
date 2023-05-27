@@ -2,28 +2,32 @@ import { useState, useContext } from "react";
 import bgImg from "../../../assets/others/authentication.png";
 import loginImg from "../../../assets/others/authentication2.png";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [name, setName] = useState("");
+  const [photo, setPhoto] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passError, setPassError] = useState("");
   const { registerUser, updateUserProfile, googleSignIn } =
     useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if ((name, email, password)) {
+    if ((name, photo)) {
       registerUser(email, password)
         .then((result) => {
           const createdUser = result.user;
-          updateUserProfile(createdUser, name);
+          updateUserProfile(createdUser, name, photo);
           toast.success("signUp user successfully");
           e.target.reset();
+          navigate("/login");
         })
         .catch((error) => {
           toast.error(error);
@@ -35,6 +39,7 @@ const Register = () => {
     googleSignIn()
       .then((result) => {
         console.log(result.user);
+        navigate("/login");
       })
       .catch((error) => toast.error(error));
   };
@@ -68,11 +73,14 @@ const Register = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Bistro Boss || Login</title>
+      </Helmet>
       <div
         className="hero min-h-screen bg-base-200"
         style={{ backgroundImage: `url("${bgImg}")` }}
       >
-        <div className="hero-content flex-col lg:flex-row lg:gap-36">
+        <div className="hero-content flex-col lg:flex-row-reverse lg:gap-36">
           <div className="text-center lg:text-left">
             <img src={loginImg} alt="" />
           </div>
@@ -86,6 +94,18 @@ const Register = () => {
                   type="text"
                   onChange={(e) => setName(e.target.value)}
                   placeholder="name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  onChange={(e) => setPhoto(e.target.value)}
+                  placeholder="photo url"
                   className="input input-bordered"
                   required
                 />

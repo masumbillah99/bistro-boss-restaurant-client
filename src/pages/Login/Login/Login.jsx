@@ -1,6 +1,6 @@
-import { useContext, useRef, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   validateCaptcha,
@@ -10,13 +10,17 @@ import bgImg from "../../../assets/others/authentication.png";
 import loginImg from "../../../assets/others/authentication2.png";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const captchaRef = useRef(null);
   const { signInUser, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -25,10 +29,10 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         toast.success("successfully logged in");
         e.target.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };
@@ -47,12 +51,16 @@ const Login = () => {
       .then((result) => {
         console.log(result.user);
         toast.success("successfully logged in with google");
+        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };
 
   return (
     <>
+      <Helmet>
+        <title>Bistro Boss || Login</title>
+      </Helmet>
       <div
         className="hero min-h-screen bg-base-200"
         style={{ backgroundImage: `url("${bgImg}")` }}
