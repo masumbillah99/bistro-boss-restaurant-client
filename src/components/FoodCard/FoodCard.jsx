@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import useCart from "../../hooks/useCart";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const FoodCard = ({ item }) => {
   const { name, recipe, image, price, _id } = item;
   const { user } = useContext(AuthContext);
+  const [refetch] = useCart();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const FoodCard = ({ item }) => {
         .then((data) => {
           if (data.insertedId) {
             toast.success("Food added on the cart");
+            refetch(); // refetch cart to update the number of items in the cart
           }
         });
     } else {
