@@ -59,7 +59,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/"
+          to="dashboard/myCart"
           className={({ isActive }) =>
             isActive
               ? "text-[#EEFF25] hover:bg-none"

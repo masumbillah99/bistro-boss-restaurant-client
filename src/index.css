@@ -2,13 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* common style start here */
+
 :root {
   --logo-font: "Cinzel", serif;
   --primary-font: "Inter", sans-serif;
   --text-font: "Raleway", sans-serif;
 }
-
-/* body style start */
 
 body {
   font-family: var(--primary-font);
@@ -22,6 +26,10 @@ body {
   font-family: var(--text-font);
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.drawer-side a.active {
+  color: white;
+}
+
+.drawer-side a {
+  background-color: transparent;
+}
