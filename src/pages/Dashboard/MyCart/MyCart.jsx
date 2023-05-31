@@ -32,7 +32,7 @@ const MyCart = () => {
         <title>Bistro Boss || MyCart</title>
       </Helmet>
       <SectionTitle subHeading="---My Cart---" heading="wanna add more?" />
-      <div className="">
+      <>
         <div className="uppercase font-semibold my-10 flex items-center justify-evenly">
           <h3>total items: {cart.length}</h3>
           <h3>total price: ${total}</h3>
@@ -79,7 +79,7 @@ const MyCart = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </>
       <ToastContainer />
     </section>
   );
