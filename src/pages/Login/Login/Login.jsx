@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
@@ -11,12 +10,13 @@ import loginImg from "../../../assets/others/authentication2.png";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const { signInUser, googleSignIn } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,16 +44,6 @@ const Login = () => {
     } else {
       alert("Captcha does not match");
     }
-  };
-
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log(result.user);
-        toast.success("successfully logged in with google");
-        navigate(from, { replace: true });
-      })
-      .catch((error) => toast.error(error.message));
   };
 
   return (
@@ -115,31 +105,15 @@ const Login = () => {
             </form>
             <div className="text-center pb-5">
               <p>
-                New here?
+                New in Bistro Boss?
                 <Link
                   to="/signUp"
                   className="text-orange-500 text-lg hover:underline ms-1"
                 >
-                  Create a New Account
+                  Create an account
                 </Link>
               </p>
-              <p className="text-center mt-3">
-                Or Sign in with
-                <span className="flex flex-row gap-3 mt-3 items-center justify-center">
-                  <button className="btn btn-outline btn-circle text-lg">
-                    <FaFacebookF />
-                  </button>
-                  <button
-                    onClick={handleGoogleSignIn}
-                    className="btn btn-outline btn-circle text-lg"
-                  >
-                    <FaGoogle />
-                  </button>
-                  <button className="btn btn-outline btn-circle text-lg">
-                    <FaGithub />
-                  </button>
-                </span>
-              </p>
+              <SocialLogin />
             </div>
           </div>
         </div>

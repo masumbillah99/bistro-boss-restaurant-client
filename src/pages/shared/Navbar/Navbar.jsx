@@ -77,7 +77,7 @@ const Navbar = () => {
           <li>
             <img
               className="w-20 rounded-full mt-3"
-              src={user?.photoURL}
+              src={user.photoURL}
               alt="user profile img"
             />
           </li>

@@ -3,17 +3,20 @@ import { HiMenu, HiMail } from "react-icons/hi";
 import { AiFillShopping } from "react-icons/ai";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import { NavLink } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+  const [cart] = useCart();
+
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content max-w-screen-xl lg:ml-40">
+      <div className="drawer-content flex flex-col items-center justify-center">
         {/* <!-- Page content here --> */}
         <MyCart />
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className="btn btn-primary drawer-button lg:hidden mt-5"
         >
           Open drawer
         </label>
@@ -44,6 +47,7 @@ const Dashboard = () => {
             <NavLink to="/dashboard/myCart">
               <FaShoppingCart />
               My Cart
+              <span className="badge badge-secondary">{cart?.length || 0}</span>
             </NavLink>
           </li>
           <div className="divider"></div>

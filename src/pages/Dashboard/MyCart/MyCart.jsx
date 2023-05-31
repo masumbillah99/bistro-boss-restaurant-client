@@ -2,15 +2,32 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 const MyCart = () => {
-  const [cart] = useCart();
-  // console.log(cart);
+  const [cart, refetch] = useCart();
 
+  // how does reduce works
   const total = cart.reduce((sum, item) => item.price + sum, 0);
 
+  const handleDelete = (item) => {
+    fetch(`http://localhost:5000/carts/${item._id}`, {
+      method: "DELETE",
+      // headers: {
+      //   "content-type": "application/json",
+      // },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("review cart deleted successfully");
+          refetch();
+        }
+      });
+  };
+
   return (
-    <section className="">
+    <section className="w-full max-w-screen-xl lg:mt-20">
       <Helmet>
         <title>Bistro Boss || MyCart</title>
       </Helmet>
@@ -50,7 +67,10 @@ const MyCart = () => {
                   <td>{item.name}</td>
                   <td>{item.price}</td>
                   <td>
-                    <button className="btn btn-ghost text-white bg-red-500 hover:bg-red-600 btn-sm">
+                    <button
+                      onClick={() => handleDelete(item)}
+                      className="btn btn-ghost text-white bg-red-500 hover:bg-red-600 btn-sm"
+                    >
                       <FaTrashAlt />
                     </button>
                   </td>
@@ -60,6 +80,7 @@ const MyCart = () => {
           </table>
         </div>
       </div>
+      <ToastContainer />
     </section>
   );
 };
