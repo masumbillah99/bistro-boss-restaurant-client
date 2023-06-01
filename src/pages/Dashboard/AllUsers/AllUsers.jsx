@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const AllUsers = () => {
@@ -8,6 +9,20 @@ const AllUsers = () => {
     const res = await fetch("http://localhost:5000/users");
     return res.json();
   });
+
+  const handleMakeAdmin = (user) => {
+    fetch(`http://localhost:5000/users/admin/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          toast.success(`${user.name} is an Admin now`);
+        }
+      });
+  };
 
   const handleDelete = (user) => {
     console.log(user);
@@ -42,13 +57,18 @@ const AllUsers = () => {
                   {user.role === "admin" ? (
                     "admin"
                   ) : (
-                    <FaUsers className="bg-orange-500 text-4xl text-white p-2 rounded-lg" />
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className="btn btn-ghost text-white bg-orange-500 hover:bg-orange-600 btn-md"
+                    >
+                      <FaUsers className="" />
+                    </button>
                   )}
                 </td>
                 <td>
                   <button
                     onClick={() => handleDelete(user)}
-                    className="btn btn-ghost text-white bg-red-500 hover:bg-red-600 btn-sm"
+                    className="btn btn-ghost text-white bg-red-500 hover:bg-red-600 btn-md"
                   >
                     <FaTrashAlt />
                   </button>
@@ -58,6 +78,7 @@ const AllUsers = () => {
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </div>
   );
 };
