@@ -38,7 +38,7 @@ const MyCart = () => {
           <h3>total price: ${total}</h3>
           <button className="btn btn-warning">pay</button>
         </div>
-        <div className="overflow-x-auto w-full">
+        <div className="overflow-x-auto w-full px-5 lg:px-0">
           <table className="table w-full">
             {/* head */}
             <thead>
