@@ -3,12 +3,19 @@ import { Helmet } from "react-helmet-async";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
-    return res.json();
+    const res = await axiosSecure.get("/users");
+    return res.data;
   });
+
+  // 1. import axiosSecure
+  // 2. call --- axiosSecure.get
+  // 3. delete base url
+  // 4. return res.data
 
   const handleMakeAdmin = (user) => {
     fetch(`http://localhost:5000/users/admin/${user._id}`, {

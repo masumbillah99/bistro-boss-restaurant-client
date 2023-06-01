@@ -30,7 +30,7 @@ const Dashboard = () => {
           htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden mt-5"
         >
-          Open drawer
+          Open Menu
         </label>
       </div>
       <div className="drawer-side ">
@@ -45,9 +45,9 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reservation">
+                <NavLink to="/dashboard/addItem">
                   <FaUtensils />
-                  add items
+                  add item
                 </NavLink>
               </li>
               <li>

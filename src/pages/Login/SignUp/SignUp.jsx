@@ -22,7 +22,6 @@ const SignUp = () => {
     console.log(data);
     registerUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      console.log(loggedUser);
       updateUserProfile(loggedUser, data.name, data.photoURL)
         .then(() => {
           const saveUser = { name: data.name, email: data.email };
