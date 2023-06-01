@@ -13,7 +13,29 @@ const AddItem = () => {
   } = useForm();
 
   const handleAddItem = (data) => {
-    console.log(data, imgHoistingToken);
+    const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgHoistingToken}`;
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+
+    fetch(imgHostingUrl, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          const imgURL = result.data.display_url;
+          const { name, category, price, recipe } = data;
+          const newMenuItem = {
+            name,
+            category,
+            price: parseFloat(price),
+            recipe,
+            image: imgURL,
+          };
+          console.log(newMenuItem);
+        }
+      });
   };
 
   return (
