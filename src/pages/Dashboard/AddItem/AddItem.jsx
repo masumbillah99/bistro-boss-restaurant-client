@@ -1,14 +1,18 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const imgHoistingToken = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 
 const AddItem = () => {
+  const [axiosSecure] = useAxiosSecure();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -33,7 +37,13 @@ const AddItem = () => {
             recipe,
             image: imgURL,
           };
-          console.log(newMenuItem);
+          axiosSecure.post("/menu", newMenuItem).then((data) => {
+            console.log("after posting new menu item", data.data);
+            if (data.data.insertedId) {
+              toast.success("Wow! you added a new item");
+              reset();
+            }
+          });
         }
       });
   };
@@ -104,6 +114,7 @@ const AddItem = () => {
           <FaUtensils className="ms-1" />
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
