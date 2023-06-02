@@ -6,6 +6,7 @@ import AddItem from "../pages/Dashboard/AddItem/AddItem";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
+import Payment from "../pages/Dashboard/Payment/Payment";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import SignUp from "../pages/Login/SignUp/SignUp";
@@ -50,10 +51,16 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // users routes
       {
         path: "myCart",
         element: <MyCart />,
       },
+      {
+        path: "payment",
+        element: <Payment />,
+      },
+      // admin routes
       {
         path: "allUsers",
         element: <AllUsers />,

@@ -3,6 +3,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
@@ -36,7 +37,9 @@ const MyCart = () => {
         <div className="uppercase font-semibold my-10 flex items-center justify-evenly">
           <h3>total items: {cart.length}</h3>
           <h3>total price: ${total}</h3>
-          <button className="btn btn-warning">pay</button>
+          <Link to="/dashboard/payment">
+            <button className="btn btn-warning">pay</button>
+          </Link>
         </div>
         <div className="overflow-x-auto w-full px-5 lg:px-0">
           <table className="table w-full">
