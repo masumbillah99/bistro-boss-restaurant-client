@@ -25,13 +25,13 @@ const Dashboard = () => {
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center">
         {/* <!-- Page content here --> */}
-        <Outlet />
         <label
           htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden mt-5"
         >
           Open Menu Bar
         </label>
+        <Outlet />
       </div>
       <div className="drawer-side ">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -39,7 +39,7 @@ const Dashboard = () => {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/user">
+                <NavLink to="/dashboard/adminHome">
                   <FaHome />
                   admin home
                 </NavLink>

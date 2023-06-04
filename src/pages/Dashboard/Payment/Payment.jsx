@@ -14,7 +14,7 @@ const Payment = () => {
 
   // how does reduce works
   const total = cart.reduce((sum, item) => item.price + sum, 0);
-  const price = parseFloat(total.toFixed(2));
+  const price = parseInt(total.toFixed(2));
 
   return (
     <div>

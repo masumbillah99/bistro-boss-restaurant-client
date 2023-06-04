@@ -9,15 +9,16 @@ const MyCart = () => {
   const [cart, refetch] = useCart();
 
   // how does reduce works
-  const total = cart.reduce((sum, item) => item.price + sum, 0);
+  const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
+  const total = parseFloat(totalPrice.toFixed(2));
 
   const handleDelete = (item) => {
-    fetch(`http://localhost:5000/carts/${item._id}`, {
-      method: "DELETE",
-      // headers: {
-      //   "content-type": "application/json",
-      // },
-    })
+    fetch(
+      `https://bistro-boss-server-side-masumbillah99.vercel.app/carts/${item._id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

@@ -4,9 +4,11 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
 
   const handleLogout = () => {
@@ -25,16 +27,6 @@ const Navbar = () => {
           }
         >
           Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive ? "text-[#EEFF25]" : "text-white"
-          }
-        >
-          dashboard
         </NavLink>
       </li>
       <li>
@@ -59,6 +51,16 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to={isAdmin ? "/dashboard/adminHome" : "/dashboard/userHome"}
+          className={({ isActive }) =>
+            isActive ? "text-[#EEFF25]" : "text-white"
+          }
+        >
+          dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="dashboard/myCart"
           className={({ isActive }) =>
             isActive
@@ -78,6 +80,7 @@ const Navbar = () => {
             <img
               className="w-20 rounded-full mt-3"
               src={user.photoURL}
+              referrerPolicy={"no-referrer"}
               alt="user profile img"
             />
           </li>

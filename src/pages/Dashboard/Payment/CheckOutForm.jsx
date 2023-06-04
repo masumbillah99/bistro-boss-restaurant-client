@@ -17,6 +17,7 @@ const CheckOutForm = ({ cart, price }) => {
 
   useEffect(() => {
     if (price > 0) {
+      console.log(price);
       // Create PaymentIntent as soon as the page loads
       axiosSecure.post("/create-payment-intent", { price }).then((res) => {
         setClientSecret(res.data.clientSecret);
@@ -85,7 +86,7 @@ const CheckOutForm = ({ cart, price }) => {
         status: "service pending",
       };
       axiosSecure.post("/payments", payment).then((res) => {
-        console.log(res.data);
+        console.log("[payments response]", res.data);
         if (res.data.insertResult.insertedId) {
           toast.success("Transaction complete successfully");
         }
